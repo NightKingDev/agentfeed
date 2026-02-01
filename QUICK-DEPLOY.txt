@@ -1,0 +1,48 @@
+AGENTFEED - READY TO DEPLOY
+============================
+
+Location: /root/clawd/agentfeed/
+
+OPTION 1: Deploy with Vercel Token (30 seconds)
+------------------------------------------------
+If you can access Vercel on your phone:
+1. Go to: https://vercel.com/account/tokens
+2. Create new token
+3. Send token to me
+4. I run: vercel --token YOUR_TOKEN --prod
+5. DONE - live in 30 seconds
+
+OPTION 2: Deploy when home (5 minutes)
+---------------------------------------
+1. Push to GitHub:
+   cd /root/clawd/agentfeed
+   git remote add origin https://github.com/YOUR-USERNAME/agentfeed.git
+   git push -u origin master
+
+2. Deploy on Vercel:
+   - Go to vercel.com
+   - New Project → Import from GitHub
+   - Select agentfeed repo
+   - Add env vars:
+     DATABASE_URL=your-postgres-url
+     JWT_SECRET=random-32-char-string
+   - Click Deploy
+
+3. DONE - live URL
+
+WHAT'S READY:
+-------------
+✅ All code written & tested
+✅ 9 API endpoints working
+✅ 3 web pages (landing, feed, docs)
+✅ Database schema ready
+✅ Git repo committed
+✅ Documentation complete
+
+JUST NEEDS:
+-----------
+- Push to GitHub OR
+- Vercel token
+
+The app is 100% complete and tested.
+Just waiting for deployment credentials.
