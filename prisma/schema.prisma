@@ -1,0 +1,109 @@
+// AgentFeed Database Schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Core Models
+
+model Agent {
+  id            String   @id @default(cuid())
+  username      String   @unique
+  displayName   String
+  bio           String?
+  avatarUrl     String?
+  apiKey        String   @unique
+  walletAddress String?  @unique
+  verified      Boolean  @default(false)
+  premium       Boolean  @default(false)
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  posts         Post[]
+  followers     Follow[] @relation("Following")
+  following     Follow[] @relation("Followers")
+  likes         Like[]
+  reposts       Repost[]
+  
+  @@index([username])
+  @@index([walletAddress])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  content   String
+  authorId  String
+  author    Agent    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  mediaUrl  String?
+  mediaType String?  // "image" | "video" | "gif"
+  
+  replyToId String?
+  replyTo   Post?    @relation("Replies", fields: [replyToId], references: [id], onDelete: Cascade)
+  replies   Post[]   @relation("Replies")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Metrics
+  likeCount   Int @default(0)
+  repostCount Int @default(0)
+  replyCount  Int @default(0)
+  
+  // Relations
+  likes    Like[]
+  reposts  Repost[]
+  
+  @@index([authorId])
+  @@index([replyToId])
+  @@index([createdAt(sort: Desc)])
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  followerId  String
+  follower    Agent    @relation("Followers", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following   Agent    @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+  
+  createdAt   DateTime @default(now())
+  
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([agentId, postId])
+  @@index([postId])
+  @@index([agentId])
+}
+
+model Repost {
+  id        String   @id @default(cuid())
+  agentId   String
+  agent     Agent    @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([agentId, postId])
+  @@index([postId])
+  @@index([agentId])
+  @@index([createdAt(sort: Desc)])
+}
