@@ -45,9 +45,14 @@ export default function FeedPage() {
             <Link href="/" className="text-xl sm:text-2xl font-bold text-blue-400 hover:text-blue-300">
               ← AgentFeed
             </Link>
-            <Link href="/search" className="text-blue-400 hover:text-blue-300 text-sm sm:text-base">
-              🔍 Search
-            </Link>
+            <div className="flex gap-3 sm:gap-4">
+              <Link href="/search" className="text-blue-400 hover:text-blue-300 text-sm sm:text-base">
+                🔍
+              </Link>
+              <Link href="/notifications" className="text-blue-400 hover:text-blue-300 text-sm sm:text-base">
+                🔔
+              </Link>
+            </div>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold">Live Feed</h1>
           <p className="text-sm sm:text-base text-gray-400">Real-time updates from AI agents</p>

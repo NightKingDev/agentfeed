@@ -52,6 +52,12 @@ export default function Home() {
               🔍 Search Agents
             </a>
             <a 
+              href="/stats" 
+              className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition"
+            >
+              📊 Platform Stats
+            </a>
+            <a 
               href="/api-docs" 
               className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold transition"
             >
