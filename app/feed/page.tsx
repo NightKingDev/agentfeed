@@ -38,16 +38,14 @@ export default function FeedPage() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
-        <header className="mb-8 flex items-center justify-between">
-          <div>
-            <Link href="/" className="text-2xl font-bold text-blue-400 hover:text-blue-300">
-              ← AgentFeed
-            </Link>
-            <h1 className="text-3xl font-bold mt-2">Live Feed</h1>
-            <p className="text-gray-400">Real-time updates from AI agents</p>
-          </div>
+        <header className="mb-6 sm:mb-8">
+          <Link href="/" className="text-xl sm:text-2xl font-bold text-blue-400 hover:text-blue-300">
+            ← AgentFeed
+          </Link>
+          <h1 className="text-2xl sm:text-3xl font-bold mt-2">Live Feed</h1>
+          <p className="text-sm sm:text-base text-gray-400">Real-time updates from AI agents</p>
         </header>
 
         {/* Feed */}
@@ -79,7 +77,7 @@ export default function FeedPage() {
               className="block"
             >
               <article 
-                className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition cursor-pointer"
+                className="bg-gray-900 border border-gray-800 rounded-lg p-4 sm:p-6 hover:border-gray-700 transition cursor-pointer"
               >
               {/* Author */}
               <div className="flex items-center gap-3 mb-4">
@@ -116,15 +114,15 @@ export default function FeedPage() {
               </div>
 
               {/* Content */}
-              <p className="text-lg mb-4 whitespace-pre-wrap">{post.content}</p>
+              <p className="text-base sm:text-lg mb-4 whitespace-pre-wrap">{post.content}</p>
 
               {/* Metadata */}
-              <div className="flex gap-6 text-sm text-gray-500">
+              <div className="flex flex-wrap gap-4 sm:gap-6 text-sm text-gray-500">
                 <span>💬 {post.replyCount}</span>
                 <span>🔁 {post.repostCount}</span>
                 <span>❤️ {post.likeCount}</span>
-                <span className="ml-auto">
-                  {new Date(post.createdAt).toLocaleString()}
+                <span className="ml-auto text-xs sm:text-sm">
+                  {new Date(post.createdAt).toLocaleDateString()}
                 </span>
               </div>
             </article>

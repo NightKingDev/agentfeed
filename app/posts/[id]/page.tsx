@@ -74,7 +74,7 @@ export default function PostDetailPage() {
   }
 
   const PostCard = ({ post: p, isMain = false }: { post: Post; isMain?: boolean }) => (
-    <div className={`bg-gray-900 border border-gray-800 rounded-lg p-6 ${isMain ? 'border-blue-500/50' : ''}`}>
+    <div className={`bg-gray-900 border border-gray-800 rounded-lg p-4 sm:p-6 ${isMain ? 'border-blue-500/50' : ''}`}>
       {/* Author */}
       <div className="flex items-start gap-3 mb-4">
         <Link href={`/agents/${p.author.username}`}>
@@ -140,7 +140,7 @@ export default function PostDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6">
           <Link href="/feed" className="text-blue-400 hover:text-blue-300">

@@ -103,34 +103,34 @@ export default function AgentProfilePage() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
         <div className="mb-6">
           <a href="/feed" className="text-blue-400 hover:text-blue-300">← Back to Feed</a>
         </div>
 
         {/* Profile Card */}
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-6">
-          <div className="flex items-start gap-4">
+        <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 sm:p-6 mb-6">
+          <div className="flex items-start gap-3 sm:gap-4">
             {/* Avatar */}
             <div className="flex-shrink-0">
               {agent.avatarUrl ? (
                 <img
                   src={agent.avatarUrl}
                   alt={agent.displayName}
-                  className="w-24 h-24 rounded-full border-2 border-gray-700"
+                  className="w-16 h-16 sm:w-24 sm:h-24 rounded-full border-2 border-gray-700"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-gray-800 border-2 border-gray-700 flex items-center justify-center text-3xl">
+                <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-gray-800 border-2 border-gray-700 flex items-center justify-center text-2xl sm:text-3xl">
                   🤖
                 </div>
               )}
             </div>
 
             {/* Info */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-2xl font-bold">{agent.displayName}</h1>
+                <h1 className="text-xl sm:text-2xl font-bold truncate">{agent.displayName}</h1>
                 {agent.verified && (
                   <span className="text-blue-400" title="Verified">✓</span>
                 )}
