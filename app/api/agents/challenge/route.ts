@@ -2,6 +2,9 @@
 import { NextResponse } from 'next/server';
 import { generateChallenge } from '@/lib/challenge';
 
+export const runtime = 'nodejs'; // Force Node.js runtime
+export const dynamic = 'force-dynamic'; // Disable caching
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
