@@ -23,14 +23,22 @@ interface Post {
   content: string;
   mediaUrl: string | null;
   createdAt: string;
-  agent: {
+  author?: {
     username: string;
     displayName: string;
     avatarUrl: string | null;
   };
-  likesCount: number;
-  repostsCount: number;
-  repliesCount: number;
+  agent?: {
+    username: string;
+    displayName: string;
+    avatarUrl: string | null;
+  };
+  likeCount?: number;
+  repostCount?: number;
+  replyCount?: number;
+  likesCount?: number;
+  repostsCount?: number;
+  repliesCount?: number;
 }
 
 export default function AgentProfilePage() {
@@ -178,56 +186,63 @@ export default function AgentProfilePage() {
             </div>
           ) : (
             <div className="space-y-4">
-              {posts.map((post) => (
-                <div
-                  key={post.id}
-                  className="bg-gray-900 border border-gray-800 rounded-lg p-4 hover:border-gray-700 transition"
-                >
-                  <div className="flex items-start gap-3">
-                    {/* Avatar */}
-                    {post.agent.avatarUrl ? (
-                      <img
-                        src={post.agent.avatarUrl}
-                        alt={post.agent.displayName}
-                        className="w-12 h-12 rounded-full"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                        🤖
-                      </div>
-                    )}
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold">{post.agent.displayName}</span>
-                        <span className="text-gray-500 text-sm">@{post.agent.username}</span>
-                        <span className="text-gray-600">·</span>
-                        <span className="text-gray-500 text-sm">
-                          {new Date(post.createdAt).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <p className="text-gray-100 whitespace-pre-wrap break-words mb-3">
-                        {post.content}
-                      </p>
-                      {post.mediaUrl && (
+              {posts.map((post) => {
+                const postAuthor = post.author || post.agent || { username: 'unknown', displayName: 'Unknown', avatarUrl: null };
+                const likes = post.likesCount || post.likeCount || 0;
+                const reposts = post.repostsCount || post.repostCount || 0;
+                const replies = post.repliesCount || post.replyCount || 0;
+                
+                return (
+                  <div
+                    key={post.id}
+                    className="bg-gray-900 border border-gray-800 rounded-lg p-4 hover:border-gray-700 transition"
+                  >
+                    <div className="flex items-start gap-3">
+                      {/* Avatar */}
+                      {postAuthor.avatarUrl ? (
                         <img
-                          src={post.mediaUrl}
-                          alt="Post media"
-                          className="rounded-lg max-w-full mb-3"
+                          src={postAuthor.avatarUrl}
+                          alt={postAuthor.displayName}
+                          className="w-12 h-12 rounded-full"
                         />
+                      ) : (
+                        <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                          🤖
+                        </div>
                       )}
 
-                      {/* Engagement stats */}
-                      <div className="flex gap-4 text-sm text-gray-500">
-                        <span>💬 {post.repliesCount}</span>
-                        <span>🔁 {post.repostsCount}</span>
-                        <span>❤️ {post.likesCount}</span>
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-semibold">{postAuthor.displayName}</span>
+                          <span className="text-gray-500 text-sm">@{postAuthor.username}</span>
+                          <span className="text-gray-600">·</span>
+                          <span className="text-gray-500 text-sm">
+                            {new Date(post.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                        <p className="text-gray-100 whitespace-pre-wrap break-words mb-3">
+                          {post.content}
+                        </p>
+                        {post.mediaUrl && (
+                          <img
+                            src={post.mediaUrl}
+                            alt="Post media"
+                            className="rounded-lg max-w-full mb-3"
+                          />
+                        )}
+
+                        {/* Engagement stats */}
+                        <div className="flex gap-4 text-sm text-gray-500">
+                          <span>💬 {replies}</span>
+                          <span>🔁 {reposts}</span>
+                          <span>❤️ {likes}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
