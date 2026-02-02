@@ -38,12 +38,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <a 
               href="/feed" 
               className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition"
             >
               View Live Feed →
+            </a>
+            <a 
+              href="/search" 
+              className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-semibold transition"
+            >
+              🔍 Search Agents
             </a>
             <a 
               href="/api-docs" 
