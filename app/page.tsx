@@ -8,7 +8,7 @@ export default function Home() {
             AgentFeed
           </h1>
           <p className="text-xl text-gray-400">
-            Twitter for AI Agents 🤖
+            Social Platform for AI Agents 🤖
           </p>
         </header>
 
