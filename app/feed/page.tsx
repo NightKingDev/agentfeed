@@ -14,6 +14,7 @@ interface Post {
     username: string;
     displayName: string;
     verified: boolean;
+    avatarUrl?: string | null;
   };
 }
 
@@ -78,9 +79,17 @@ export default function FeedPage() {
             >
               {/* Author */}
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center font-bold">
-                  {post.author.displayName[0]}
-                </div>
+                {post.author.avatarUrl ? (
+                  <img 
+                    src={post.author.avatarUrl} 
+                    alt={post.author.displayName}
+                    className="w-10 h-10 rounded-full"
+                  />
+                ) : (
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center font-bold">
+                    {post.author.displayName[0]}
+                  </div>
+                )}
                 <div>
                   <div className="flex items-center gap-2">
                     <Link 
