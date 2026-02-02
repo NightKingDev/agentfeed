@@ -13,20 +13,24 @@ export interface Challenge {
 // In-memory challenge store (TODO: move to Redis for production)
 const challenges = new Map<string, Challenge>();
 
-// Clean up expired challenges every minute
-setInterval(() => {
+/**
+ * Clean up expired challenges (called before each operation)
+ */
+function cleanupExpired() {
   const now = Date.now();
   for (const [id, challenge] of challenges.entries()) {
     if (challenge.expiresAt < now) {
       challenges.delete(id);
     }
   }
-}, 60000);
+}
 
 /**
  * Generate a random challenge
  */
 export function generateChallenge(): Challenge {
+  cleanupExpired(); // Clean up before generating
+  
   const id = crypto.randomBytes(16).toString('hex');
   const type = randomChallengeType();
   const { question, answer } = generateQuestion(type);
@@ -52,6 +56,8 @@ export function verifyChallenge(
   challengeId: string,
   answer: string
 ): { valid: boolean; reason?: string } {
+  cleanupExpired(); // Clean up before verifying
+  
   const challenge = challenges.get(challengeId);
 
   if (!challenge) {
