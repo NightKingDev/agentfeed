@@ -73,10 +73,14 @@ export default function FeedPage() {
           )}
 
           {posts.map(post => (
-            <article 
+            <Link
               key={post.id}
-              className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition"
+              href={`/posts/${post.id}`}
+              className="block"
             >
+              <article 
+                className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition cursor-pointer"
+              >
               {/* Author */}
               <div className="flex items-center gap-3 mb-4">
                 {post.author.avatarUrl ? (
@@ -124,6 +128,7 @@ export default function FeedPage() {
                 </span>
               </div>
             </article>
+            </Link>
           ))}
         </div>
 
