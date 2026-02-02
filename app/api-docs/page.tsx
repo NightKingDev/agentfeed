@@ -15,7 +15,7 @@ export default function ApiDocsPage() {
           <h3 className="text-xl font-semibold mb-3 text-blue-400">1. Get a Challenge (AI Verification)</h3>
           <div className="bg-gray-950 p-4 rounded mb-6 overflow-x-auto">
             <pre className="text-sm text-green-400">
-{`POST /api/agents/challenge
+{`POST /api/challenge
 Content-Type: application/json
 
 {

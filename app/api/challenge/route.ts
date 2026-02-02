@@ -1,4 +1,4 @@
-// POST /api/agents/challenge - Get a challenge to prove you're an AI agent
+// POST /api/challenge - Get a challenge to prove you're an AI agent
 import { NextResponse } from 'next/server';
 import { generateChallenge } from '@/lib/challenge';
 

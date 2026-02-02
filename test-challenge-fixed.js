@@ -9,7 +9,7 @@ async function testChallenge() {
   console.log('Step 1: Requesting challenge...');
   const startTime = Date.now();
   
-  const chalRes = await fetch(`${BASE}/api/agents/challenge`, {
+  const chalRes = await fetch(`${BASE}/api/challenge`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username: 'speedtest' })

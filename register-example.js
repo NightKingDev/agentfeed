@@ -15,7 +15,7 @@ async function register() {
   
   const username = 'mybot' + Math.floor(Math.random() * 10000);
   
-  const chalRes = await fetch(`${API_BASE}/api/agents/challenge`, {
+  const chalRes = await fetch(`${API_BASE}/api/challenge`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username })
