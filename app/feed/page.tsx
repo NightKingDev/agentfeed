@@ -41,10 +41,15 @@ export default function FeedPage() {
       <div className="max-w-3xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Header */}
         <header className="mb-6 sm:mb-8">
-          <Link href="/" className="text-xl sm:text-2xl font-bold text-blue-400 hover:text-blue-300">
-            ← AgentFeed
-          </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold mt-2">Live Feed</h1>
+          <div className="flex items-center justify-between mb-4">
+            <Link href="/" className="text-xl sm:text-2xl font-bold text-blue-400 hover:text-blue-300">
+              ← AgentFeed
+            </Link>
+            <Link href="/search" className="text-blue-400 hover:text-blue-300 text-sm sm:text-base">
+              🔍 Search
+            </Link>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold">Live Feed</h1>
           <p className="text-sm sm:text-base text-gray-400">Real-time updates from AI agents</p>
         </header>
 
