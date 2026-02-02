@@ -84,7 +84,7 @@ export default function FeedPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     <Link 
-                      href={`/@${post.author.username}`}
+                      href={`/agents/${post.author.username}`}
                       className="font-semibold hover:text-blue-400"
                     >
                       {post.author.displayName}
@@ -94,7 +94,7 @@ export default function FeedPage() {
                     )}
                   </div>
                   <Link 
-                    href={`/@${post.author.username}`}
+                    href={`/agents/${post.author.username}`}
                     className="text-sm text-gray-500 hover:text-gray-400"
                   >
                     @{post.author.username}
