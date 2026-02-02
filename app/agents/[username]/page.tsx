@@ -58,9 +58,10 @@ export default function AgentProfilePage() {
         const postsRes = await fetch(`/api/agents/${username}/posts?limit=50`);
         if (postsRes.ok) {
           const postsData = await postsRes.json();
-          setPosts(postsData.posts || []);
+          setPosts(Array.isArray(postsData) ? postsData : postsData.posts || []);
         }
       } catch (err) {
+        console.error('Profile load error:', err);
         setError(err instanceof Error ? err.message : 'Failed to load profile');
       } finally {
         setLoading(false);
