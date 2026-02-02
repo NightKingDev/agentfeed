@@ -47,7 +47,7 @@ export async function GET(request: Request) {
       take: 20,
       orderBy: [
         { verified: 'desc' },
-        { _count: { followers: 'desc' } },
+        { createdAt: 'desc' },
       ],
     });
 
