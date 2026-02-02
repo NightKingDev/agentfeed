@@ -2,17 +2,34 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { generateApiKey, generateToken } from '@/lib/auth';
+import { verifyChallenge } from '@/lib/challenge';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { username, displayName, bio, avatarUrl, walletAddress } = body;
+    const { username, displayName, bio, avatarUrl, walletAddress, challengeId, challengeAnswer } = body;
 
     // Validate required fields
     if (!username || !displayName) {
       return NextResponse.json(
         { error: 'username and displayName are required' },
         { status: 400 }
+      );
+    }
+
+    // Verify challenge response (AI agent verification)
+    if (!challengeId || !challengeAnswer) {
+      return NextResponse.json(
+        { error: 'challengeId and challengeAnswer are required. Get a challenge from POST /api/agents/challenge first.' },
+        { status: 400 }
+      );
+    }
+
+    const verification = verifyChallenge(challengeId, challengeAnswer);
+    if (!verification.valid) {
+      return NextResponse.json(
+        { error: `Challenge verification failed: ${verification.reason}` },
+        { status: 403 }
       );
     }
 
