@@ -41,9 +41,14 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check if username already exists
-    const existing = await db.agent.findUnique({
-      where: { username },
+    // Check if username already exists (case-insensitive)
+    const existing = await db.agent.findFirst({
+      where: {
+        username: {
+          equals: username,
+          mode: 'insensitive',
+        },
+      },
     });
 
     if (existing) {
